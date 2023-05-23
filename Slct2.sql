@@ -4,10 +4,9 @@ SELECT g.genre_name, COUNT(a.artist_name) FROM genres g
 	GROUP BY g.genre_name
 	ORDER BY COUNT(a.id) DESC;
 	
-SELECT COUNT(t.track_name) FROM tracks t
-	LEFT JOIN albums a ON t.album_id = a.id
-	WHERE a.album_release_date >= 2019 AND a.album_release_date <= 2020
-	GROUP BY t.track_name;
+SELECT COUNT(t.id) FROM tracks t
+	LEFT JOIN albums a ON a.id = t.album_id
+	WHERE a.album_release_date BETWEEN 2019 AND 2020;
 	
 SELECT a.album_name, AVG(t.track_duration) FROM albums a
 	LEFT JOIN tracks t ON t.album_id = a.id
@@ -15,9 +14,11 @@ SELECT a.album_name, AVG(t.track_duration) FROM albums a
 	ORDER BY AVG(t.track_duration) DESC;
 	
 SELECT a.artist_name FROM artists a
-	LEFT JOIN artists_album aa ON aa.artist_id = a.id
-	LEFT JOIN albums alb ON aa.album_id = alb.id
-	WHERE alb.album_release_date != 2020;
+	WHERE a.artist_name NOT IN (
+		SELECT artist_name FROM artists
+		LEFT JOIN artists_album aa ON aa.artist_id = a.id
+		LEFT JOIN albums alb ON aa.album_id = alb.id
+		WHERE alb.album_release_date = 2020);
 	
 SELECT DISTINCT tc.tc_name FROM tracks_collection tc
 	LEFT JOIN trackstracks tt ON tc.id = tt.tc_id
@@ -27,13 +28,12 @@ SELECT DISTINCT tc.tc_name FROM tracks_collection tc
 	LEFT JOIN artists a ON aa.artist_id = a.id
 	WHERE a.artist_name ILIKE 'Lady Gaga';
 
-SELECT alb.album_name FROM albums alb
+SELECT DISTINCT alb.album_name FROM albums alb
 	LEFT JOIN artists_album aa ON alb.id = aa.album_id
 	LEFT JOIN artists a ON aa.artist_id = a.id
-	LEFT JOIN genres_artists ga ON ga.artist_id = a.id
-	LEFT JOIN genres g ON ga.genre_id = g.id
-	GROUP BY alb.album_name
-	HAVING COUNT(DISTINCT g.genre_name) > 1;
+	LEFT JOIN genres_artists ga ON a.id = ga.artist_id
+	GROUP BY alb.album_name, aa.artist_id
+	HAVING COUNT(ga.genre_id) > 1;
 
 SELECT t.track_name FROM tracks t
 	LEFT JOIN trackstracks tt ON t.id = tt.track_id 

@@ -56,22 +56,22 @@ INSERT INTO artists_album(artist_id, album_id)
 
 INSERT INTO tracks(album_id, track_name, track_duration)
 	VALUES
-		(1, 'Just Dance', 4.01),
-		(1, 'Love Game', 3.36),
-		(2, 'Hero', 3.06),
-		(2, 'Monster', 2.58),
-		(2, 'Awake and Alive', 3.29),
-		(3, 'Take It Out On Me', 3.17),
-		(4, 'Sing Me to Sleep', 3.07),
-		(4, 'Faded', 3.32),
-		(5, 'Toccata and Fugue in D Minor', 9.20),
-		(6, 'The Real Slim Shady', 4.44),
-		(7, 'Miracle', 3.08),
-		(7, 'Never Say Die', 4.23),
-		(8, 'Credo', 3.04),
-		(9, 'Story of My Life', 4.05),
-		(9, 'You & I', 3.57),
-		(3, 'Look Away', 4.01);
+		(1, 'Just Dance', '00:04:01'),
+		(1, 'Love Game', '00:03:36'),
+		(2, 'Hero', '00:03:06'),
+		(2, 'Monster', '00:02:58'),
+		(2, 'Awake and Alive', '00:03:29'),
+		(3, 'Take It Out On Me', '00:03:17'),
+		(4, 'Sing Me to Sleep', '00:03:07'),
+		(4, 'Faded', '00:03:32'),
+		(5, 'Toccata and Fugue in D Minor', '00:09:20'),
+		(6, 'The Real Slim Shady', '00:04:44'),
+		(7, 'Miracle', '00:03:08'),
+		(7, 'Never Say Die', '00:04:23'),
+		(8, 'Credo', '00:03:04'),
+		(9, 'Story of My Life', '00:04:05'),
+		(9, 'You & I', '00:03:57'),
+		(3, 'Look Away', '00:04:01');
 
 INSERT INTO tracks_collection(tc_name, tc_release_date)
 	VALUES
